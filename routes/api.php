@@ -24,7 +24,7 @@ Route::get('email/verify/{id}', [Api\VerifyController::class, 'verify'])->name('
     
 //App
 Route::get('/news', [Api\NewsController::class,'show']);
-Route::get('/projects', [Api\ProjectsController::class,'show']);
+Route::get('/projects/{id}', [Api\ProjectsController::class,'show']);
 
 
 Route::group(['middleware' => ['auth:api']], function () {

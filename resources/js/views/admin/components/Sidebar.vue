@@ -8,20 +8,19 @@
         class="sidebar-brand d-flex align-items-center justify-content-center"
         to="/"
       >
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        
+        <div class="sidebar-brand-text mx-3">BigHand</div>
       </router-link>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0" />
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <router-link class="nav-link" to="/admin">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></router-link
+      
+      <li class="nav-item active" v-for="item in sidebarItems" :key="item.id">
+        <router-link class="nav-link" :to="item.link">
+          <i :class="item.icon"></i>
+          <span>{{item.name}}</span></router-link
         >
       </li>
 
@@ -150,8 +149,26 @@
 </template>
 
 <script>
-
+import { ref } from 'vue'
 export default {
-    name: 'Sidebar'
+    name: 'Sidebar',
+    data(){
+      return{ 
+        sidebarItems:[
+          {
+            id:1,
+            name:'Projects',
+            icon:'fa-solid fa-folder-heart',
+            link:'/admin/projects'
+          },
+          {
+            id:2,
+            name:'News',
+            icon:'fa-solid fa-newspaper',
+            link:'/admin/news'
+          },
+        ]
+      }
+    }
 }
 </script>

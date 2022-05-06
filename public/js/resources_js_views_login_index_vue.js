@@ -178,15 +178,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.$router.push("/admin");
 
-                _context.next = 12;
+                _context.next = 14;
                 break;
 
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](0);
+                console.error(_context.t0);
+                console.error("asdfasdf");
                 _utils_notify_js__WEBPACK_IMPORTED_MODULE_3__.authError(_context.t0);
 
-              case 12:
+              case 14:
               case "end":
                 return _context.stop();
             }

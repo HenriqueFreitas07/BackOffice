@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Auth\Events\Registered;
 
@@ -19,11 +20,13 @@ class AuthController extends Controller
     {
         try {
             if (Auth::attempt($request->only('email', 'password'))) {
+                Log::info("Entrou");
                 /** @var User $user */
                 $user = Auth::user();
                 $token = $user->createToken('API Token')->accessToken;
-
+                
                 if (config('auth.must_verify_email') && !$user->hasVerifiedEmail()) {
+                    Log::info("Entrou");
                     return response([
                         'message' => 'Email must be verified.'
                     ], 401);
@@ -37,7 +40,7 @@ class AuthController extends Controller
             }
         } catch (\Exception $e) {
             return response([
-                'message' => 'Internal error, please try again later.' //$e->getMessage()
+                'message' => 'Internal error, please try again later.'.$e->getMessage()
             ], 400);
         }
 

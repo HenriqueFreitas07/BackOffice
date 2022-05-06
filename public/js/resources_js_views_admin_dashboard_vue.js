@@ -772,7 +772,7 @@ var staticRenderFns = [
         },
         [
           _c("h1", { staticClass: "h3 mb-0 text-gray-800" }, [
-            _vm._v("Dashboard")
+            _vm._v("BigHand")
           ]),
           _vm._v(" "),
           _c(
