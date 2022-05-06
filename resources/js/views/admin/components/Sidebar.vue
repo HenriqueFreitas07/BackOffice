@@ -157,14 +157,14 @@ export default {
         sidebarItems:[
           {
             id:1,
-            name:'Projects',
-            icon:'fa-solid fa-folder-heart',
+            name:'Projectos',
+            icon:'fa fa-flag',
             link:'/admin/projects'
           },
           {
             id:2,
-            name:'News',
-            icon:'fa-solid fa-newspaper',
+            name:'Notícias',
+            icon:'fa fa-newspaper',
             link:'/admin/news'
           },
         ]

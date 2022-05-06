@@ -27,13 +27,16 @@
                                 <td>{{ item.date }}</td>
                                 <td>
                                     <router-link :to="'/admin/projects/'+item.project_id">
-                                        <button class="btn-circle bg-gradient-info text-white">
-                                            <i
-                                                class="fa fa-pen"
-                                            ></i>
+                                        <button class=" btn btn-primary text-white">
+                                            <i class="fa fa-eye"></i>
                                         </button>
                                     </router-link>
-                                    <button class="btn-circle bg-gradient-danger text-white">
+                                    <router-link :to="'/admin/projects/edit/'+item.project_id">
+                                        <button class=" btn btn-success text-white">
+                                            <i class="fa fa-pen"></i>
+                                        </button>
+                                    </router-link>
+                                    <button class="btn btn-danger text-white">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>

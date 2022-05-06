@@ -64,7 +64,7 @@ let router = new Router({
         {
             path: "/admin/projects",
             name: "buttons",
-            component: () => import("./views/admin/projects.vue"),
+            component: () => import("./views/admin/projects/projects.vue"),
             meta: {
                 requiresAuth: true,
                 layout: AdminLayout
@@ -73,7 +73,16 @@ let router = new Router({
         {
             path: "/admin/projects/:project_id",
             name: "buttons",
-            component: () => import("./views/admin/projectsEdit.vue"),
+            component: () => import("./views/admin/projects/projectsShow.vue"),
+            meta: {
+                requiresAuth: true,
+                layout: AdminLayout
+            }
+        },
+        {
+            path: "/admin/projects/edit/:project_id",
+            name: "buttons",
+            component: () => import("./views/admin/projects/projectsEdit.vue"),
             meta: {
                 requiresAuth: true,
                 layout: AdminLayout
@@ -82,7 +91,16 @@ let router = new Router({
         {
             path: "/admin/news",
             name: "buttons",
-            component: () => import("./views/admin/news.vue"),
+            component: () => import("./views/admin/news/news.vue"),
+            meta: {
+                requiresAuth: true,
+                layout: AdminLayout
+            }
+        },
+        {
+            path: "/admin/news/edit/:news_id",
+            name: "buttons",
+            component: () => import("./views/admin/news/newsEdit.vue"),
             meta: {
                 requiresAuth: true,
                 layout: AdminLayout

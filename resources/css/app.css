@@ -1,0 +1,15 @@
+.image_template
+{
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  object-fit: scale-down;
+}
+.image_template img 
+{
+  width: 100%;
+}
+.card_img_news
+{
+  max-height: 200px;
+}
