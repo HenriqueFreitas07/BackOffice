@@ -360,7 +360,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                      Reset Password\n                    "
+                                  "\r\n                      Reset Password\r\n                    "
                                 )
                               ]
                             )

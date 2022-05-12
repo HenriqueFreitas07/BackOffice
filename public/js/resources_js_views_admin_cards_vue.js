@@ -244,16 +244,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Cards'
+  name: 'Cards',
+  props: ['data'],
+  mounted: function mounted() {
+    console.log(this.data.type);
+  }
 });
 
 /***/ }),
@@ -346,25 +342,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "div",
-        {
-          staticClass:
-            "d-sm-flex align-items-center justify-content-between mb-4"
-        },
-        [_c("h1", { staticClass: "h3 mb-0 text-gray-800" }, [_vm._v("Cards")])]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+  return _c("div", { attrs: { width: "100%" } }, [
+    _vm.data.type == 1
+      ? _c("div", { staticClass: "col-xl-12 col-md-6 mb-4" }, [
           _c(
             "div",
             { staticClass: "card border-left-primary shadow h-100 py-2" },
@@ -383,7 +363,9 @@ var staticRenderFns = [
                         },
                         [
                           _vm._v(
-                            "\n                Earnings (Monthly)\n              "
+                            "\n                " +
+                              _vm._s(_vm.data.title) +
+                              "\n              "
                           )
                         ]
                       ),
@@ -393,23 +375,27 @@ var staticRenderFns = [
                         {
                           staticClass: "h5 mb-0 font-weight-bold text-gray-800"
                         },
-                        [_vm._v("\n                $40,000\n              ")]
+                        [
+                          _vm._v(
+                            "\n                €" +
+                              _vm._s(_vm.data.text) +
+                              "\n              "
+                          )
+                        ]
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-auto" }, [
-                      _c("i", {
-                        staticClass: "fas fa-calendar fa-2x text-gray-300"
-                      })
-                    ])
+                    _vm._m(0)
                   ]
                 )
               ])
             ]
           )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.data.type == 2
+      ? _c("div", { staticClass: "col-xl-12 col-md-6 mb-4" }, [
           _c(
             "div",
             { staticClass: "card border-left-success shadow h-100 py-2" },
@@ -428,7 +414,9 @@ var staticRenderFns = [
                         },
                         [
                           _vm._v(
-                            "\n                Earnings (Annual)\n              "
+                            "\n                " +
+                              _vm._s(_vm.data.title) +
+                              "\n              "
                           )
                         ]
                       ),
@@ -438,23 +426,27 @@ var staticRenderFns = [
                         {
                           staticClass: "h5 mb-0 font-weight-bold text-gray-800"
                         },
-                        [_vm._v("\n                $215,000\n              ")]
+                        [
+                          _vm._v(
+                            "\n                €" +
+                              _vm._s(_vm.data.text) +
+                              "\n              "
+                          )
+                        ]
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-auto" }, [
-                      _c("i", {
-                        staticClass: "fas fa-dollar-sign fa-2x text-gray-300"
-                      })
-                    ])
+                    _vm._m(1)
                   ]
                 )
               ])
             ]
           )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.data.type == 3
+      ? _c("div", { staticClass: "col-xl-12 col-md-6 mb-4" }, [
           _c(
             "div",
             { staticClass: "card border-left-info shadow h-100 py-2" },
@@ -471,7 +463,13 @@ var staticRenderFns = [
                           staticClass:
                             "text-xs font-weight-bold text-info text-uppercase mb-1"
                         },
-                        [_vm._v("\n                Tasks\n              ")]
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.data.title) +
+                              "\n              "
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
@@ -487,7 +485,9 @@ var staticRenderFns = [
                               },
                               [
                                 _vm._v(
-                                  "\n                    50%\n                  "
+                                  "\n                    " +
+                                    _vm._s(_vm.data.text) +
+                                    "%\n                  "
                                 )
                               ]
                             )
@@ -500,7 +500,7 @@ var staticRenderFns = [
                               [
                                 _c("div", {
                                   staticClass: "progress-bar bg-info",
-                                  staticStyle: { width: "50%" },
+                                  style: "width:" + _vm.data.text + "%",
                                   attrs: {
                                     role: "progressbar",
                                     "aria-valuenow": "50",
@@ -515,213 +515,242 @@ var staticRenderFns = [
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-auto" }, [
-                      _c("i", {
-                        staticClass: "fas fa-clipboard-list fa-2x text-gray-300"
-                      })
-                    ])
-                  ]
-                )
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
-          _c(
-            "div",
-            { staticClass: "card border-left-warning shadow h-100 py-2" },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "div",
-                  { staticClass: "row no-gutters align-items-center" },
-                  [
-                    _c("div", { staticClass: "col mr-2" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "\n                  text-xs\n                  font-weight-bold\n                  text-warning text-uppercase\n                  mb-1\n                "
-                        },
-                        [
-                          _vm._v(
-                            "\n                Pending Requests\n              "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "h5 mb-0 font-weight-bold text-gray-800"
-                        },
-                        [_vm._v("18")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-auto" }, [
-                      _c("i", {
-                        staticClass: "fas fa-comments fa-2x text-gray-300"
-                      })
-                    ])
+                    _vm._m(2)
                   ]
                 )
               ])
             ]
           )
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-6" }, [
-          _c("div", { staticClass: "card mb-4" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Default Card Example")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n          This card uses Bootstrap's default styling with no utility classes\n          added. Global styles are the only things modifying the look and feel\n          of this default card example.\n        "
-              )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.data.type == 4
+      ? _c("div", { staticClass: "col-xl-12 col-md-6 mb-4" }, [_vm._m(3)])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.data.type == 5
+      ? _c("div", { staticClass: "col-lg-12" }, [_vm._m(4)])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.data.type == 6
+      ? _c("div", { staticClass: "card shadow mb-4" }, [
+          _c("div", { staticClass: "card-header py-3" }, [
+            _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
+              _vm._v("\n            " + _vm._s(_vm.data.title) + "\n          ")
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card shadow mb-4" }, [
-            _c("div", { staticClass: "card-header py-3" }, [
-              _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-                _vm._v("\n            Basic Card Example\n          ")
-              ])
+          _c("div", { staticClass: "card-body" }, [
+            _vm._v("\n          " + _vm._s(_vm.data.text) + "\n        ")
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.data.type == 7
+      ? _c("div", { staticClass: "col-lg-12\n    " }, [
+          _vm._m(5),
+          _vm._v(" "),
+          _vm._m(6)
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("i", { staticClass: "fas fa-calendar fa-2x text-gray-300" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("i", { staticClass: "fas fa-dollar-sign fa-2x text-gray-300" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("i", { staticClass: "fas fa-clipboard-list fa-2x text-gray-300" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card border-left-warning shadow h-100 py-2" },
+      [
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row no-gutters align-items-center" }, [
+            _c("div", { staticClass: "col mr-2" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "\n                  text-xs\n                  font-weight-bold\n                  text-warning text-uppercase\n                  mb-1\n                "
+                },
+                [_vm._v("\n                Pending Requests\n              ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
+                [_vm._v("18")]
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n          The styling for this basic card example is created by using default\n          Bootstrap utility classes. By using utility classes, the style of\n          the card component can be easily modified with no need for any\n          custom CSS!\n        "
-              )
+            _c("div", { staticClass: "col-auto" }, [
+              _c("i", { staticClass: "fas fa-comments fa-2x text-gray-300" })
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-6" }, [
-          _c("div", { staticClass: "card shadow mb-4" }, [
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card mb-4" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _vm._v("Default Card Example")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _vm._v(
+          "\n          This card uses Bootstrap's default styling with no utility classes\n          added. Global styles are the only things modifying the look and feel\n          of this default card example.\n        "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card shadow mb-4" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "\n            card-header\n            py-3\n            d-flex\n            flex-row\n            align-items-center\n            justify-content-between\n          "
+        },
+        [
+          _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
+            _vm._v("\n            Dropdown Card Example\n          ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "dropdown no-arrow" }, [
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-toggle",
+                attrs: {
+                  href: "#",
+                  role: "button",
+                  id: "dropdownMenuLink",
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
+                })
+              ]
+            ),
+            _vm._v(" "),
             _c(
               "div",
               {
                 staticClass:
-                  "\n            card-header\n            py-3\n            d-flex\n            flex-row\n            align-items-center\n            justify-content-between\n          "
+                  "\n                dropdown-menu dropdown-menu-right\n                shadow\n                animated--fade-in\n              ",
+                attrs: { "aria-labelledby": "dropdownMenuLink" }
               },
               [
-                _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-                  _vm._v("\n            Dropdown Card Example\n          ")
+                _c("div", { staticClass: "dropdown-header" }, [
+                  _vm._v("Dropdown Header:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "dropdown no-arrow" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-toggle",
-                      attrs: {
-                        href: "#",
-                        role: "button",
-                        id: "dropdownMenuLink",
-                        "data-toggle": "dropdown",
-                        "aria-haspopup": "true",
-                        "aria-expanded": "false"
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass:
-                          "fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "\n                dropdown-menu dropdown-menu-right\n                shadow\n                animated--fade-in\n              ",
-                      attrs: { "aria-labelledby": "dropdownMenuLink" }
-                    },
-                    [
-                      _c("div", { staticClass: "dropdown-header" }, [
-                        _vm._v("Dropdown Header:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { staticClass: "dropdown-item", attrs: { href: "#" } },
-                        [_vm._v("Action")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { staticClass: "dropdown-item", attrs: { href: "#" } },
-                        [_vm._v("Another action")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "dropdown-divider" }),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { staticClass: "dropdown-item", attrs: { href: "#" } },
-                        [_vm._v("Something else here")]
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n          Dropdown menus can be placed in the card header in order to extend\n          the functionality of a basic card. In this dropdown card example,\n          the Font Awesome vertical ellipsis icon in the card header can be\n          clicked on in order to toggle a dropdown menu.\n        "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card shadow mb-4" }, [
-            _c(
-              "a",
-              {
-                staticClass: "d-block card-header py-3",
-                attrs: {
-                  href: "#collapseCardExample",
-                  "data-toggle": "collapse",
-                  role: "button",
-                  "aria-expanded": "true",
-                  "aria-controls": "collapseCardExample"
-                }
-              },
-              [
-                _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-                  _vm._v("\n            Collapsable Card Example\n          ")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse show",
-                attrs: { id: "collapseCardExample" }
-              },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _vm._v(
-                    "\n            This is a collapsable card example using Bootstrap's built in\n            collapse functionality.\n            "
-                  ),
-                  _c("strong", [_vm._v("Click on the card header")]),
-                  _vm._v(
-                    " to see the card body\n            collapse and expand!\n          "
-                  )
-                ])
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("Action")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("Another action")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "dropdown-divider" }),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("Something else here")]
+                )
               ]
             )
           ])
-        ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _vm._v(
+          "\n          Dropdown menus can be placed in the card header in order to extend\n          the functionality of a basic card. In this dropdown card example,\n          the Font Awesome vertical ellipsis icon in the card header can be\n          clicked on in order to toggle a dropdown menu.\n        "
+        )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card shadow mb-4" }, [
+      _c(
+        "a",
+        {
+          staticClass: "d-block card-header py-3",
+          attrs: {
+            href: "#collapseCardExample",
+            "data-toggle": "collapse",
+            role: "button",
+            "aria-expanded": "true",
+            "aria-controls": "collapseCardExample"
+          }
+        },
+        [
+          _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
+            _vm._v("\n            Collapsable Card Example\n          ")
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "collapse show", attrs: { id: "collapseCardExample" } },
+        [
+          _c("div", { staticClass: "card-body" }, [
+            _vm._v(
+              "\n            This is a collapsable card example using Bootstrap's built in\n            collapse functionality.\n            "
+            ),
+            _c("strong", [_vm._v("Click on the card header")]),
+            _vm._v(
+              " to see the card body\n            collapse and expand!\n          "
+            )
+          ])
+        ]
+      )
     ])
   }
 ]

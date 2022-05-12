@@ -1,0 +1,87 @@
+<template>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Timeline</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <b-table
+                    hover
+                    :bordered="true"
+                    :items="timeline"
+                >
+                    <template #cell(editar)="data">
+                        <router-link
+                            :to="'/admin/timeline/' + data.item.editar"
+                        >
+                            <button class=" btn btn-primary text-white">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </router-link>
+                        <router-link
+                            :to="'/admin/timeline/edit/' + data.item.editar"
+                        >
+                            <button class=" btn btn-success text-white">
+                                <i class="fa fa-pen"></i>
+                            </button>
+                        </router-link>
+                        <button @click="Delete(data.item.editar)" class="btn btn-danger text-white">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </template>
+                </b-table>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import axios from "axios";
+export default {
+    data() {
+        return {
+            timeline: [],
+        };
+    },
+    async mounted() {
+        const response = await axios.get("timeline/all");
+        response.data.forEach((element, index) => {
+            let p;
+            if (element.is_publish == "yes") {
+                p = "";
+            } else {
+                p = "warning";
+            }
+            let f = {
+                _rowVariant: p,
+                Evento: element.project_id,
+                Publicado: element.is_publish,
+                Nome: element.title,
+                Data: element.date,
+                editar: element.project_id
+            };
+            this.timeline.push(f);
+        });
+    },
+     methods:{
+         async Delete(id)
+        {
+
+            const r = await axios.post("timeline/delete/"+id);
+            console.log(r)
+            if (r.status == 200) {
+                let toast = this.$toasted.show(r.data.message, {
+                    theme: "outline",
+                    position: "top-center",
+                    duration: 1000
+                });
+                
+            }
+        }
+     }
+};
+</script>
+
+<style lang="scss" scoped></style>

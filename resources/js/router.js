@@ -98,9 +98,45 @@ let router = new Router({
             }
         },
         {
+            path: "/admin/news/:news_id",
+            name: "buttons",
+            component: () => import("./views/admin/news/newsShow.vue"),
+            meta: {
+                requiresAuth: true,
+                layout: AdminLayout
+            }
+        },
+        {
             path: "/admin/news/edit/:news_id",
             name: "buttons",
             component: () => import("./views/admin/news/newsEdit.vue"),
+            meta: {
+                requiresAuth: true,
+                layout: AdminLayout
+            }
+        },
+        {
+            path: "/admin/timeline",
+            name: "buttons",
+            component: () => import("./views/admin/timeline/timeline.vue"),
+            meta: {
+                requiresAuth: true,
+                layout: AdminLayout
+            }
+        },
+        {
+            path: "/admin/timeline/:timeline_id",
+            name: "buttons",
+            component: () => import("./views/admin/timeline/timelineShow.vue"),
+            meta: {
+                requiresAuth: true,
+                layout: AdminLayout
+            }
+        },
+        {
+            path: "/admin/timeline/edit/:timeline_id",
+            name: "buttons",
+            component: () => import("./views/admin/timeline/timelineEdit.vue"),
             meta: {
                 requiresAuth: true,
                 layout: AdminLayout

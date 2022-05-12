@@ -16,7 +16,7 @@
                         <i class="fa fa-pen"></i>
                     </button>
                 </router-link>
-                <button class="btn btn-danger text-white">
+                <button @click="Delete(data.item.editar)"class="btn btn-danger text-white">
                     <i class="fas fa-trash"></i>
                 </button>
             </template>
@@ -55,7 +55,22 @@ export default {
             };
             this.projectsData.push(f);
         });
-    }
+    },
+    methods: {
+        async Delete(id)
+        {
+            const r = await axios.post("projects/delete/"+id);
+            console.log(r)
+            if (r.status == 200) {
+                let toast = this.$toasted.show(r.data.message, {
+                    theme: "outline",
+                    position: "top-center",
+                    duration: 1000
+                });
+                
+            }
+        }
+    },
 };
 </script>
 

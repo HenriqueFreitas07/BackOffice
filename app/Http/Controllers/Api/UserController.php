@@ -14,23 +14,24 @@ use Illuminate\Support\Facades\Cookie;
 
 class UserController extends Controller
 {
+
     
     //
     public function todos(){
         return response()->json(["Bacano está a funcionar!"],200);
     }
 
-    public function login(Request $request) {
+    public function login(LoginRequest $request) {
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required',
         ]);
         
         $credentials = request(['email', 'password']);
+        
         if(!Auth::attempt($credentials))
         {
-            Log::info($credentials);
-            return response()->json(['message' => 'Oops!'], 401);
+            return response()->json(['message' => 'Oops!'], 201);
         }
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
@@ -52,11 +53,11 @@ class UserController extends Controller
         if(!isset($result[0]))
        {
            $request->validate([
-               'username'=> 'required',
+               'first_name'=> 'required',
                'email' => 'required|string|email|unique:users',
                'password' => 'required|string'
            ]);
-           $user= ['username'=>$request->username,'email'=>$request->email,'password'=>Hash::make($request->password)];
+           $user= ['first_name'=>$request->first_name,'email'=>$request->email,'password'=>Hash::make($request->password),'last_name'=>" ","admin"=>"0"];
            $user=User::create($user);
            return response()->json([
                'message' => 'Criado com sucesso!',"user"=>$user
@@ -64,8 +65,8 @@ class UserController extends Controller
            
         }
         return response()->json([
-            'message' => 'Already in use!'
-        ], 401);
+            'message' => 'Usuário já existente!'
+        ], 200);
     }
 
 

@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    //'allowed_origins' => ['http://192.168.0.86:8101','http://127.0.0.1', 'http://localhost:8101','http://localhost:8100','http://192.168.0.86:8100'],
+    //'allowed_origins' => ['http://192.168.0.86:8100','http://192.168.0.86:8100'],
     'allowed_origins' => ['http://localhost','http://localhost:8100','http://127.0.0.1:8000'],
 
     'allowed_origins_patterns' => [''],

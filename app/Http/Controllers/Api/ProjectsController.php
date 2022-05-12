@@ -37,4 +37,17 @@ class ProjectsController extends Controller
         }
         
     }
+    
+    function delete(Request $request , $id)
+    {
+        $p=Projects::where('project_id',$id)->delete();
+        if($p)
+        {
+            return response(['message'=>"Projecto eliminado com sucesso!"],200);
+        }
+        else
+        {
+            return response(['message'=>"Não foi possível realizar o seu pedido !"],201);
+        }
+    }
 }

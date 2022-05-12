@@ -25,18 +25,18 @@ class AuthController extends Controller
                 $user = Auth::user();
                 $token = $user->createToken('API Token')->accessToken;
                 
-                if (config('auth.must_verify_email') && !$user->hasVerifiedEmail()) {
+           /*      if (config('auth.must_verify_email') && !$user->hasVerifiedEmail()) {
                     Log::info("Entrou");
                     return response([
                         'message' => 'Email must be verified.'
                     ], 401);
-                }
+                } */
 
                 return response([
-                    'message' => 'success',
+                    'message' => 'Login bem sucedido!',
                     'token' => $token,
                     'user' => $user
-                ]);
+                ],200);
             }
         } catch (\Exception $e) {
             return response([
@@ -45,12 +45,21 @@ class AuthController extends Controller
         }
 
         return response([
-            'message' => 'Invalid Email or password.'
-        ], 401);
+            'message' => 'E-mail ou password ínválida!'
+        ], 201);
     }
 
     public function user()
     {
         return response()->json(Auth::user());
+    }
+
+    public function verifyToken(Request $request)
+    {
+        if(Auth::guard('api')->check())
+        {
+            return response(["msg"=>"Valid token"],200);
+        }
+            return response(["msg"=>"Invalid token"],404);
     }
 }

@@ -167,6 +167,12 @@ export default {
             icon:'fa fa-newspaper',
             link:'/admin/news'
           },
+          {
+            id:3,
+            name:'Timeline',
+            icon:'fa fa-newspaper',
+            link:'/admin/timeline'
+          },
         ]
       }
     }

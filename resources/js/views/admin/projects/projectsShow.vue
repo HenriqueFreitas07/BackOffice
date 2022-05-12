@@ -17,9 +17,7 @@
         <br>
         <CardComponent :data="{type:2,title:'Angariado', text:data[0].raised }"/>
         <br>
-
-            <CardComponent :data="{type:3,title:'Concluído', text:Math.round((data[0].raised/data[0].goal)*100) }"/>
-
+        <CardComponent :data="{type:3,title:'Concluído', text:Math.round((data[0].raised/data[0].goal)*100) }"/>
       </div>
       <div class="row">
         <div class="col-md-12">
