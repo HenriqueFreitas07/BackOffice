@@ -27,19 +27,24 @@ Route::post('reset', [Api\ForgotController::class, 'reset']);
 Route::get('email/resend/{user}', [Api\VerifyController::class, 'resend'])->name('verification.resend');
 Route::get('email/verify/{id}', [Api\VerifyController::class, 'verify'])->name('verification.verify');; // Make sure to keep this as your route name
     
-//App
-Route::get('/news/{id}', [Api\NewsController::class, 'show']);
-Route::post('/news/update/{id}', [Api\NewsController::class, 'update']);
-
-Route::get('/timeline/{id}', [Api\TimelineController::class, 'show']);
-Route::post('/timeline/update/{id}', [Api\TimelineController::class, 'update']);
-Route::post('/timeline/delete/{id}', [Api\TimelineController::class, 'delete']);
-
-Route::get('/projects/{id}', [Api\ProjectsController::class,'show']);
-Route::post('/projects/update/{id}', [Api\ProjectsController::class,'update']);
-Route::post('/projects/delete/{id}', [Api\ProjectsController::class,'delete']);
 
 
 Route::group(['middleware' => ['auth:api']], function () {
+    //App
+    Route::get('/news/{id}', [Api\NewsController::class, 'show']);
+    Route::post('/news/update/{id}', [Api\NewsController::class, 'update']);
+    
+    Route::get('/timeline/{id}', [Api\TimelineController::class, 'show']);
+    Route::post('/timeline/update/{id}', [Api\TimelineController::class, 'update']);
+    Route::post('/timeline/delete/{id}', [Api\TimelineController::class, 'delete']);
+    
+    Route::get('/projects/{id}', [Api\ProjectsController::class,'show']);
+    Route::post('/projects/update/{id}', [Api\ProjectsController::class,'update']);
+    Route::post('/projects/delete/{id}', [Api\ProjectsController::class,'delete']);
+    
+    Route::get('/donations/{id}', [Api\DonationsController::class,'show']);
+    Route::post('/donations/update/{id}', [Api\DonationsController::class,'update']);
+    Route::post('/donations/delete/{id}', [Api\DonationsController::class,'delete']);
+    
     Route::get('user', [Api\AuthController::class, 'user']);
 });

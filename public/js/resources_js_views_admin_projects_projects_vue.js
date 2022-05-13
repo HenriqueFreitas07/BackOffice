@@ -99,6 +99,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     }))();
+  },
+  methods: {
+    Delete: function Delete(id) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var r, toast;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("projects/delete/" + id);
+
+              case 2:
+                r = _context2.sent;
+                console.log(r);
+
+                if (r.status == 200) {
+                  toast = _this2.$toasted.show(r.data.message, {
+                    theme: "outline",
+                    position: "top-center",
+                    duration: 1000
+                  });
+                }
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    }
   }
 });
 
@@ -235,9 +269,18 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c("button", { staticClass: "btn btn-danger text-white" }, [
-                  _c("i", { staticClass: "fas fa-trash" })
-                ])
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger text-white",
+                    on: {
+                      click: function($event) {
+                        return _vm.Delete(data.item.editar)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-trash" })]
+                )
               ]
             }
           }

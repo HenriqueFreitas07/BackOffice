@@ -99,7 +99,10 @@ export default {
     Nav,
     LoadingButton,
   },
-  data() {
+  data() 
+
+  {
+
     return {
       first_name: "",
       last_name: "",
@@ -127,11 +130,11 @@ export default {
           this.$router.push(`/verify/user/${response.data.id}`);
         } else {
           let message =
-            "Your account has been created successfully. Please Log in.";
+            "Conta criada com sucesso.";
           let toast = Vue.toasted.show(message, {
             theme: "toasted-primary",
             position: "top-right",
-            duration: 5000,
+            duration: 3000,
           });
           this.$router.push("/login");
         }

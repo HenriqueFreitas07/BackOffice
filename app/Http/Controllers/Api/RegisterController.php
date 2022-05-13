@@ -18,6 +18,7 @@ class RegisterController extends Controller
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
                 'email' => $request->input('email'),
+                'admin' => '1',
                 'password' => Hash::make($request->input('password')),
             ]);
 
@@ -27,8 +28,9 @@ class RegisterController extends Controller
 
             return response()->json($user);
         } catch (\Exception $e) {
+
             return response([
-                'message' => 'Internal error, please try again later.' //$e->getMessage()
+                'message' => 'Internal error, please try again later.' .$e->getMessage()
             ], 400);
         }
     }

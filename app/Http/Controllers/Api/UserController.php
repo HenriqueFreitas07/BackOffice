@@ -21,7 +21,7 @@ class UserController extends Controller
         return response()->json(["Bacano está a funcionar!"],200);
     }
 
-    public function login(LoginRequest $request) {
+    public function login(Request $request) {
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required',
