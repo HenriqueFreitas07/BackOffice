@@ -147,8 +147,24 @@ export default {
       }
     },
   },
+  mounted(){
+    console.log("mounted")
+  }
 };
 </script>
 
 <style>
+.bg-login-image {
+  background: url("https://www.thebighand.org/wp-content/uploads/2019/02/gallery_5_the_big_hand-360x360.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+
+
+.bg-password-image {
+  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+  background-position: center;
+  background-size: cover;
+}
 </style>

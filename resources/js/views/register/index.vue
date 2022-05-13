@@ -143,3 +143,10 @@ export default {
   },
 };
 </script>
+<style>
+.bg-register-image {
+  background: url("https://www.thebighand.org/wp-content/uploads/2019/03/gallery_thebighand_1-360x360.jpg");
+  background-position: center;
+  background-size: cover;
+}
+</style>

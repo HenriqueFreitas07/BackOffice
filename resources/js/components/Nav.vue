@@ -14,7 +14,9 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <router-link class="navbar-brand" to="/">Home</router-link>
+          <router-link class="navbar-brand" to="/">
+            <b-img height="50px" src="https://www.thebighand.org/wp-content/uploads/2019/02/logotipo_bighand.png" alt=""></b-img>
+          </router-link>
           <ul class="navbar-nav mt-2 mt-lg-0 ml-auto" v-if="!user">
             <li class="nav-item active">
               <router-link class="nav-link" to="/login"
