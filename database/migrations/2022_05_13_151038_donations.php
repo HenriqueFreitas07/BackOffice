@@ -18,7 +18,7 @@ class Donations extends Migration
             $table->id();
             $table->integer('project_id')->nullable();
             $table->date('date')->nullable();
-            $table->interger('amount');
+            $table->integer('amount');
             $table->integer('id_user');
             $table->boolean('anonymous');
             $table->text('meta_title')->nullable();

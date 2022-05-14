@@ -34,6 +34,16 @@
               >
             </li>
           </ul>
+          <ul class="navbar-nav mx-2" v-if="user">
+            <li class="nav-item active">
+              <router-link class="nav-link d-flex" to="/admin" >
+                <div class="m-3">
+                  Dashboard Admin
+                </div>
+                <i class="my-auto fa fa-screwdriver fa-lg"></i>
+              </router-link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>

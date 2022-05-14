@@ -6,17 +6,20 @@
  -->
         <b-table hover :bordered="true" :items="projectsData" :fields="fields">
             <template #cell(editar)="data">
-                <router-link :to="'/admin/projects/'+data.item.editar">
+                <router-link :to="'/admin/projects/' + data.item.editar">
                     <button class=" btn btn-primary text-white">
                         <i class="fa fa-eye"></i>
                     </button>
                 </router-link>
-                <router-link :to="'/admin/projects/edit/'+ data.item.editar">
+                <router-link :to="'/admin/projects/edit/' + data.item.editar">
                     <button class=" btn btn-success text-white">
                         <i class="fa fa-pen"></i>
                     </button>
                 </router-link>
-                <button @click="Delete(data.item.editar)"class="btn btn-danger text-white">
+                <button
+                    @click="Delete(data.item.editar)"
+                    class="btn btn-danger text-white"
+                >
                     <i class="fas fa-trash"></i>
                 </button>
             </template>
@@ -25,11 +28,11 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import axios from "axios";
 export default {
     name: "Projects",
-    components: {
-    },
+    components: {},
     data() {
         return {
             fields: ["Projecto", "Publicado", "Nome", "Data", "Editar"],
@@ -57,20 +60,30 @@ export default {
         });
     },
     methods: {
-        async Delete(id)
-        {
-            const r = await axios.post("projects/delete/"+id);
-            console.log(r)
-            if (r.status == 200) {
-                let toast = this.$toasted.show(r.data.message, {
-                    theme: "outline",
-                    position: "top-center",
-                    duration: 1000
-                });
-                
-            }
+        async Delete(id) {
+            Swal.fire({
+                title: "Têm a certeza?",
+                text: "Não irá conseguir reverter esta ação!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    const r = await axios.post("projects/delete/" + id);
+                    console.log(r);
+                    if (r.status == 200) {
+                        Swal.fire(
+                            "Deleted!",
+                            "Your file has been deleted.",
+                            "success"
+                        );
+                    }
+                }
+            });
         }
-    },
+    }
 };
 </script>
 

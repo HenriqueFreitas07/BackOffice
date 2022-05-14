@@ -23,7 +23,33 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
-export default function chartBarDemo() {
+export default function chartBarDemo(data) {
+    let dataconfig
+    if(data==null)
+    {
+         dataconfig= [
+            {
+                label: "Doado",
+                backgroundColor: "gray",
+                hoverBackgroundColor: "",
+                borderColor: "#4e73df",
+                data: [100, 100, 100, 100, 100, 100,100,100,100,100,100]
+            }
+        ]
+    }
+    else
+    { 
+        dataconfig= [
+            { 
+                label: "Doado",
+                backgroundColor: "#4e73df",
+                hoverBackgroundColor: "#3d62ce",
+                borderColor: "#28a745",
+                data:data,
+            }
+        ]
+    }
+    
     // Set new default font family and font color to mimic Bootstrap's default styling
     (Chart.defaults.global.defaultFontFamily = "Nunito"),
         '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -33,16 +59,8 @@ export default function chartBarDemo() {
     var myBarChart = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["January", "February", "March", "April", "May", "June"],
-            datasets: [
-                {
-                    label: "Revenue",
-                    backgroundColor: "#4e73df",
-                    hoverBackgroundColor: "#2e59d9",
-                    borderColor: "#4e73df",
-                    data: [4215, 5312, 6251, 7841, 9821, 14984]
-                }
-            ]
+            labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+            datasets:dataconfig
         },
         options: {
             maintainAspectRatio: false,
@@ -54,6 +72,7 @@ export default function chartBarDemo() {
                     bottom: 0
                 }
             },
+            borderRadius:5,
             scales: {
                 xAxes: [
                     {
@@ -65,7 +84,7 @@ export default function chartBarDemo() {
                             drawBorder: false
                         },
                         ticks: {
-                            maxTicksLimit: 6
+                            maxTicksLimit: 12
                         },
                         maxBarThickness: 25
                     }
@@ -74,12 +93,12 @@ export default function chartBarDemo() {
                     {
                         ticks: {
                             min: 0,
-                            max: 15000,
+                            max: 1200,
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
                             callback: function(value, index, values) {
-                                return "$" + number_format(value);
+                                return "€" + number_format(value);
                             }
                         },
                         gridLines: {
@@ -98,14 +117,14 @@ export default function chartBarDemo() {
             tooltips: {
                 titleMarginBottom: 10,
                 titleFontColor: "#6e707e",
-                titleFontSize: 14,
+                titleFontSize: 16,
                 backgroundColor: "rgb(255,255,255)",
                 bodyFontColor: "#858796",
                 borderColor: "#dddfeb",
-                borderWidth: 1,
+                borderWidth: 2,
                 xPadding: 15,
                 yPadding: 15,
-                displayColors: false,
+                displayColors: true,
                 caretPadding: 10,
                 callbacks: {
                     label: function(tooltipItem, chart) {
@@ -114,7 +133,7 @@ export default function chartBarDemo() {
                             "";
                         return (
                             datasetLabel +
-                            ": $" +
+                            ": €" +
                             number_format(tooltipItem.yLabel)
                         );
                     }

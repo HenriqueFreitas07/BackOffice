@@ -45,6 +45,5 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/donations/{id}', [Api\DonationsController::class,'show']);
     Route::post('/donations/update/{id}', [Api\DonationsController::class,'update']);
     Route::post('/donations/delete/{id}', [Api\DonationsController::class,'delete']);
-    
     Route::get('user', [Api\AuthController::class, 'user']);
 });

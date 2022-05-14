@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Timeline extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'is_publish',
         'is_top',

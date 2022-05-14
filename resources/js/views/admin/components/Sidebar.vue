@@ -156,6 +156,12 @@ export default {
       return{ 
         sidebarItems:[
           {
+            id:0,
+            name:'Doações',
+            icon:'fa fa-chart-bar',
+            link:'/admin#'
+          },
+          {
             id:1,
             name:'Projectos',
             icon:'fa fa-flag',
@@ -170,7 +176,7 @@ export default {
           {
             id:3,
             name:'Timeline',
-            icon:'fa fa-newspaper',
+            icon:'fa fa-handshake',
             link:'/admin/timeline'
           },
         ]
