@@ -23,9 +23,10 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
-export default function chartBarDemo(data) {
+export default function chartBarDemo(data,type) {
     let dataconfig
-    if(data==null)
+    let lb
+    if(data==null) 
     {
          dataconfig= [
             {
@@ -33,11 +34,11 @@ export default function chartBarDemo(data) {
                 backgroundColor: "gray",
                 hoverBackgroundColor: "",
                 borderColor: "#4e73df",
-                data: [100, 100, 100, 100, 100, 100,100,100,100,100,100]
+                data: [0, 0, 0, 0, 0, 0,0,0,0,0,0]
             }
         ]
     }
-    else
+    else if (data!=null )
     { 
         dataconfig= [
             { 
@@ -49,6 +50,14 @@ export default function chartBarDemo(data) {
             }
         ]
     }
+     if (type!=null)
+    { 
+        lb=type
+    }
+    else
+    { 
+        lb=["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
+    }
     
     // Set new default font family and font color to mimic Bootstrap's default styling
     (Chart.defaults.global.defaultFontFamily = "Nunito"),
@@ -59,7 +68,7 @@ export default function chartBarDemo(data) {
     var myBarChart = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+            labels: lb,
             datasets:dataconfig
         },
         options: {
@@ -93,7 +102,7 @@ export default function chartBarDemo(data) {
                     {
                         ticks: {
                             min: 0,
-                            max: 1200,
+                            max: 1000,
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks

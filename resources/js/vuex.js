@@ -5,7 +5,8 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 const state = {
-    user: null
+    user: null,
+    donations:[],
 };
 
 const store = new Vuex.Store({
@@ -23,7 +24,11 @@ const store = new Vuex.Store({
     mutations: {
         user: (state, user) => {
             state.user = user;
-        }
+        },
+        donations: (state, donation) => {
+            state.donations = donation;
+        },
+        
     },
     plugins: [createPersistedState()]
 });
