@@ -6,19 +6,32 @@
         </div>
         <div class="row">
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-                <h3 class="ml-4 font-weight-bold text-primary">2022</h3>
+            <div class=" col-lg-9">
+              <v-progress-linear
+        color="lime"
+        indeterminate
+        reverse
+      ></v-progress-linear>
+                <h3 class="ml-4 font-weight-bold text-primary">
+                    Total-{{ selectedYear }}
+                </h3>
                 <div class="chart-area" id="chart-area">
                     <canvas id="myBarChart"></canvas>
                 </div>
             </div>
             <v-divider vertical> </v-divider>
-            <div class="col-xl-4 col-lg-3">
+            <div class=" col-lg-3">
                 <h5 class="pl-2">Mês</h5>
                 <b-form-select
                     @change="ChangeMonthDonations"
                     v-model="selectedMonth"
                     :options="selectMonths"
+                ></b-form-select>
+                <h5 class="pl-2">Ano</h5>
+                <b-form-select
+                    @change="ChangeYearDonations()"
+                    v-model="selectedYear"
+                    :options="Year"
                 ></b-form-select>
             </div>
 
@@ -87,6 +100,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import chartAreaDemo from "../../chart/demo/chart-area-demo";
 import chartPieDemo from "../../chart/demo/chart-pie-demo";
 import chartBarDemo from "../../chart/demo/chart-bar-demo";
@@ -112,7 +126,12 @@ export default {
                 { value: 12, text: "Dezembro" },
                 { value: 13, text: "Ano inteiro" }
             ],
-            selectedMonth: 13
+            selectedMonth: 13,
+            Year: Array.from(
+                { length: 10 },
+                (_, index) => new Date().getFullYear() - 10 + index + 1
+            ),
+            selectedYear: 2022
         };
     },
     mounted() {
@@ -140,13 +159,24 @@ export default {
                 if (this.dataSetChart.length != 0 && this.months == 13) {
                     this.$store.commit("donations", this.dataSetChart);
                 }
+                console.log(this.$store.state.donations);
                 this.SwitchCanvas();
                 chartBarDemo(this.$store.state.donations);
                 this.months = 14;
+                console.log(this.dataSetChart);
+                if (this.dataSetChart.length == 0) {
+                    Swal.fire(
+                        "Aviso",
+                        "Não existe nenhuma, registo dos dados selecionados!",
+                        "info"
+                    );
+                }
             }
         },
         async requestMonthDonations(month) {
-            const r = await axios.get("donations/" + month);
+            const r = await axios.get(
+                "donations/" + month + "/" + this.selectedYear
+            );
             return r;
         },
         async ChangeMonthDonations(month) {
@@ -165,6 +195,12 @@ export default {
             } else {
                 this.mediaMonths();
             }
+        },
+        ChangeYearDonations() {
+            this.selectedMonth=13
+            this.$store.commit("donations", []);
+            this.months = 1;
+            this.mediaMonths();
         },
         SwitchCanvas() {
             let box = document.getElementById("chart-area");

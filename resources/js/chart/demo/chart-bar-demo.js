@@ -89,13 +89,13 @@ export default function chartBarDemo(data,type) {
                             unit: "month"
                         },
                         gridLines: {
-                            display: false,
+                            display: true,
                             drawBorder: false
                         },
                         ticks: {
-                            maxTicksLimit: 12
+                            maxTicksLimit: 24
                         },
-                        maxBarThickness: 25
+                        maxBarThickness: 50
                     }
                 ],
                 yAxes: [

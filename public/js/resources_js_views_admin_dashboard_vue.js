@@ -11,9 +11,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _chart_demo_chart_area_demo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../chart/demo/chart-area-demo */ "./resources/js/chart/demo/chart-area-demo.js");
-/* harmony import */ var _chart_demo_chart_pie_demo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../chart/demo/chart-pie-demo */ "./resources/js/chart/demo/chart-pie-demo.js");
-/* harmony import */ var _chart_demo_chart_bar_demo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../chart/demo/chart-bar-demo */ "./resources/js/chart/demo/chart-bar-demo.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _chart_demo_chart_area_demo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../chart/demo/chart-area-demo */ "./resources/js/chart/demo/chart-area-demo.js");
+/* harmony import */ var _chart_demo_chart_pie_demo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../chart/demo/chart-pie-demo */ "./resources/js/chart/demo/chart-pie-demo.js");
+/* harmony import */ var _chart_demo_chart_bar_demo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../chart/demo/chart-bar-demo */ "./resources/js/chart/demo/chart-bar-demo.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -102,41 +112,198 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Dashboard",
+  data: function data() {
+    return {
+      months: 1,
+      dataSetChart: [],
+      selectMonths: [{
+        value: 1,
+        text: "Janeiro"
+      }, {
+        value: 2,
+        text: "Fevereiro"
+      }, {
+        value: 3,
+        text: "Março"
+      }, {
+        value: 4,
+        text: "Abril"
+      }, {
+        value: 5,
+        text: "Maio"
+      }, {
+        value: 6,
+        text: "Junho"
+      }, {
+        value: 7,
+        text: "Julho"
+      }, {
+        value: 8,
+        text: "Agosto"
+      }, {
+        value: 9,
+        text: "Setembro"
+      }, {
+        value: 10,
+        text: "Outubro"
+      }, {
+        value: 11,
+        text: "Novembro"
+      }, {
+        value: 12,
+        text: "Dezembro"
+      }, {
+        value: 13,
+        text: "Ano inteiro"
+      }],
+      selectedMonth: 13
+    };
+  },
   mounted: function mounted() {
-    (0,_chart_demo_chart_area_demo__WEBPACK_IMPORTED_MODULE_0__.default)();
-    (0,_chart_demo_chart_pie_demo__WEBPACK_IMPORTED_MODULE_1__.default)();
-    (0,_chart_demo_chart_bar_demo__WEBPACK_IMPORTED_MODULE_2__.default)();
+    //chartAreaDemo();
+    //chartPieDemo();
+    (0,_chart_demo_chart_bar_demo__WEBPACK_IMPORTED_MODULE_3__.default)();
+    this.mediaMonths();
+  },
+  methods: {
+    mediaMonths: function mediaMonths() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response, data, values, a;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(_this.months < 13 && _this.$store.state.donations.length == 0)) {
+                  _context.next = 12;
+                  break;
+                }
+
+                _context.next = 3;
+                return _this.requestMonthDonations(_this.months);
+
+              case 3:
+                response = _context.sent;
+                data = response.data;
+                values = [];
+                data.forEach(function (el) {
+                  values.push(el.amount);
+                });
+                a = values.reduce(function (a, b) {
+                  return a + b;
+                }, 0);
+
+                _this.dataSetChart.push(a.toFixed(2));
+
+                setTimeout(function () {
+                  _this.months++;
+
+                  _this.mediaMonths();
+                }, 25);
+                _context.next = 16;
+                break;
+
+              case 12:
+                if (_this.dataSetChart.length != 0 && _this.months == 13) {
+                  _this.$store.commit("donations", _this.dataSetChart);
+                }
+
+                _this.SwitchCanvas();
+
+                (0,_chart_demo_chart_bar_demo__WEBPACK_IMPORTED_MODULE_3__.default)(_this.$store.state.donations);
+                _this.months = 14;
+
+              case 16:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    requestMonthDonations: function requestMonthDonations(month) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var r;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_4___default().get("donations/" + month);
+
+              case 2:
+                r = _context2.sent;
+                return _context2.abrupt("return", r);
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    ChangeMonthDonations: function ChangeMonthDonations(month) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var rr, data, days;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(month != 13)) {
+                  _context3.next = 12;
+                  break;
+                }
+
+                _context3.next = 3;
+                return _this2.requestMonthDonations(month);
+
+              case 3:
+                rr = _context3.sent;
+                data = rr.data;
+                _this2.dataSetChart = [];
+                days = [];
+                data.forEach(function (el) {
+                  var day = new Date(el.date);
+
+                  _this2.dataSetChart.push(JSON.stringify(el.amount));
+
+                  days.push(day.getMonth() + 1 + "/" + day.getDate());
+                });
+
+                _this2.SwitchCanvas();
+
+                (0,_chart_demo_chart_bar_demo__WEBPACK_IMPORTED_MODULE_3__.default)(_this2.dataSetChart, days);
+                _context3.next = 13;
+                break;
+
+              case 12:
+                _this2.mediaMonths();
+
+              case 13:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    SwitchCanvas: function SwitchCanvas() {
+      var box = document.getElementById("chart-area");
+      document.getElementById("myBarChart").remove();
+      var g = document.createElement("canvas");
+      g.setAttribute("id", "myBarChart");
+      box.appendChild(g);
+    }
   }
 });
 
@@ -321,8 +488,35 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-function chartBarDemo() {
-  // Set new default font family and font color to mimic Bootstrap's default styling
+function chartBarDemo(data, type) {
+  var dataconfig;
+  var lb;
+
+  if (data == null) {
+    dataconfig = [{
+      label: "Doado",
+      backgroundColor: "gray",
+      hoverBackgroundColor: "",
+      borderColor: "#4e73df",
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    }];
+  } else if (data != null) {
+    dataconfig = [{
+      label: "Doado",
+      backgroundColor: "#4e73df",
+      hoverBackgroundColor: "#3d62ce",
+      borderColor: "#28a745",
+      data: data
+    }];
+  }
+
+  if (type != null) {
+    lb = type;
+  } else {
+    lb = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  } // Set new default font family and font color to mimic Bootstrap's default styling
+
+
   Chart.defaults.global.defaultFontFamily = "Nunito", '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
   Chart.defaults.global.defaultFontColor = "#858796"; // Bar Chart Example
 
@@ -330,14 +524,8 @@ function chartBarDemo() {
   var myBarChart = new Chart(ctx, {
     type: "bar",
     data: {
-      labels: ["January", "February", "March", "April", "May", "June"],
-      datasets: [{
-        label: "Revenue",
-        backgroundColor: "#4e73df",
-        hoverBackgroundColor: "#2e59d9",
-        borderColor: "#4e73df",
-        data: [4215, 5312, 6251, 7841, 9821, 14984]
-      }]
+      labels: lb,
+      datasets: dataconfig
     },
     options: {
       maintainAspectRatio: false,
@@ -349,6 +537,7 @@ function chartBarDemo() {
           bottom: 0
         }
       },
+      borderRadius: 5,
       scales: {
         xAxes: [{
           time: {
@@ -359,19 +548,19 @@ function chartBarDemo() {
             drawBorder: false
           },
           ticks: {
-            maxTicksLimit: 6
+            maxTicksLimit: 12
           },
           maxBarThickness: 25
         }],
         yAxes: [{
           ticks: {
             min: 0,
-            max: 15000,
+            max: 1000,
             maxTicksLimit: 5,
             padding: 10,
             // Include a dollar sign in the ticks
             callback: function callback(value, index, values) {
-              return "$" + number_format(value);
+              return "€" + number_format(value);
             }
           },
           gridLines: {
@@ -389,19 +578,19 @@ function chartBarDemo() {
       tooltips: {
         titleMarginBottom: 10,
         titleFontColor: "#6e707e",
-        titleFontSize: 14,
+        titleFontSize: 16,
         backgroundColor: "rgb(255,255,255)",
         bodyFontColor: "#858796",
         borderColor: "#dddfeb",
-        borderWidth: 1,
+        borderWidth: 2,
         xPadding: 15,
         yPadding: 15,
-        displayColors: false,
+        displayColors: true,
         caretPadding: 10,
         callbacks: {
           label: function label(tooltipItem, chart) {
             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || "";
-            return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
+            return datasetLabel + ": €" + number_format(tooltipItem.yLabel);
           }
         }
       }
@@ -549,170 +738,66 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("v-divider", { attrs: { vertical: "" } }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-xl-4 col-lg-3" },
+          [
+            _c("h5", { staticClass: "pl-2" }, [_vm._v("Mês")]),
+            _vm._v(" "),
+            _c("b-form-select", {
+              attrs: { options: _vm.selectMonths },
+              on: { change: _vm.ChangeMonthDonations },
+              model: {
+                value: _vm.selectedMonth,
+                callback: function($$v) {
+                  _vm.selectedMonth = $$v
+                },
+                expression: "selectedMonth"
+              }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "div",
-        {
-          staticClass:
-            "d-sm-flex align-items-center justify-content-between mb-4"
-        },
-        [
-          _c("h1", { staticClass: "h3 mb-0 text-gray-800" }, [
-            _vm._v("BigHand")
-          ])
-        ]
-      ),
+    return _c(
+      "div",
+      {
+        staticClass: "d-sm-flex align-items-center justify-content-between mb-4"
+      },
+      [_c("h1", { staticClass: "h3 mb-0 text-gray-800" }, [_vm._v("BigHand")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xl-8 col-lg-7" }, [
+      _c("h3", { staticClass: "ml-4 font-weight-bold text-primary" }, [
+        _vm._v("2022")
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-xl-8 col-lg-7" }, [
-          _c("div", { staticClass: "card shadow mb-4" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "\n            card-header\n            py-3\n            d-flex\n            flex-row\n            align-items-center\n            justify-content-between\n          "
-              },
-              [
-                _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-                  _vm._v("Earnings Overview")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "dropdown no-arrow" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-toggle",
-                      attrs: {
-                        href: "#",
-                        role: "button",
-                        id: "dropdownMenuLink",
-                        "data-toggle": "dropdown",
-                        "aria-haspopup": "true",
-                        "aria-expanded": "false"
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass:
-                          "fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
-                      })
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "chart-area" }, [
-                _c("canvas", { attrs: { id: "myAreaChart" } })
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-4 col-lg-5" }, [
-          _c("div", { staticClass: "card shadow mb-4" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "\n            card-header\n            py-3\n            d-flex\n            flex-row\n            align-items-center\n            justify-content-between\n          "
-              },
-              [
-                _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-                  _vm._v("Revenue Sources")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "dropdown no-arrow" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-toggle",
-                      attrs: {
-                        href: "#",
-                        role: "button",
-                        id: "dropdownMenuLink",
-                        "data-toggle": "dropdown",
-                        "aria-haspopup": "true",
-                        "aria-expanded": "false"
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass:
-                          "fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "\n                dropdown-menu dropdown-menu-right\n                shadow\n                animated--fade-in\n              ",
-                      attrs: { "aria-labelledby": "dropdownMenuLink" }
-                    },
-                    [
-                      _c("div", { staticClass: "dropdown-header" }, [
-                        _vm._v("Dropdown Header:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { staticClass: "dropdown-item", attrs: { href: "#" } },
-                        [_vm._v("Action")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { staticClass: "dropdown-item", attrs: { href: "#" } },
-                        [_vm._v("Another action")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "dropdown-divider" }),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { staticClass: "dropdown-item", attrs: { href: "#" } },
-                        [_vm._v("Something else here")]
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "chart-pie pt-4 pb-2" }, [
-                _c("canvas", { attrs: { id: "myPieChart" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "mt-4 text-center small" }, [
-                _c("span", { staticClass: "mr-2" }, [
-                  _c("i", { staticClass: "fas fa-circle text-primary" }),
-                  _vm._v(" Direct\n            ")
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "mr-2" }, [
-                  _c("i", { staticClass: "fas fa-circle text-success" }),
-                  _vm._v(" Social\n            ")
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "mr-2" }, [
-                  _c("i", { staticClass: "fas fa-circle text-info" }),
-                  _vm._v(" Referral\n            ")
-                ])
-              ])
-            ])
-          ])
-        ])
+      _c("div", { staticClass: "chart-area", attrs: { id: "chart-area" } }, [
+        _c("canvas", { attrs: { id: "myBarChart" } })
       ])
     ])
   }

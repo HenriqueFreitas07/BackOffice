@@ -10,13 +10,12 @@ use Carbon\Carbon;
 class DonationsController extends Controller
 {
     //
-    function show(Request $request, $id){
-
-        if ($id != null)
+    function show($mes,$ano){
+        if ($mes != null)
         {
-            if($id !== 'all')
+            if($mes !== 'all')
             {
-                $data=Donations::whereMonth("date",$id)->orderBy("date","asc")->get();
+                $data=Donations::whereMonth("date",$mes)->whereYear("date",$ano)->orderBy("date","asc")->get();
                 return $data;
             }
             else
@@ -27,7 +26,7 @@ class DonationsController extends Controller
         }
         else 
         {
-            $data=Donations::where('project_id',$id)->get();
+            $data=Donations::where('project_mes',$mes)->get();
             return $data;
         }
     }
@@ -35,7 +34,7 @@ class DonationsController extends Controller
 /*     function update(Request $request)
     {
         $project=array("is_publish"=>$request->is_publish,"goal"=>$request->goal,"raised"=>$request->raised,"location"=>$request->location,"date"=>$request->date,"story"=>$request->story,"feature_image"=>$request->feature_image,"updated_at"=>Carbon::now(),"date"=>$request->date);
-        $p= Donations::where('project_id',$request->project_id)->update($project);
+        $p= Donations::where('project_mes',$request->project_mes)->update($project);
         if($p)
         {
             return response(['message'=>"Projecto atualizado com sucesso!"],200);
@@ -43,16 +42,16 @@ class DonationsController extends Controller
         
     } */
 /*     
-    function delete(Request $request , $id)
+    function delete(Request $request , $mes)
     {
-        $p=Donations::where('project_id',$id)->delete();
+        $p=Donations::where('project_mes',$mes)->delete();
         if($p)
         {
             return response(['message'=>"Projecto eliminado com sucesso!"],200);
         }
         else
         {
-            return response(['message'=>"Não foi possível realizar o seu pedido !"],201);
+            return response(['message'=>"Não foi possível realizar o seu pedmeso !"],201);
         }
     } */
 }

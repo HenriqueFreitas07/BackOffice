@@ -16,14 +16,16 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import vuetify from './vuetify';
+import 'vuetify/src/styles/main.sass'
+
+import Vuetify from './vuetify.js';
 
 window.Vue = require("vue").default;
 
 Vue.use(Toasted);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-Vue.use(vuetify)
+Vue.use(Vuetify)
 
 /**
  * The following block of code may be used to automatically register your

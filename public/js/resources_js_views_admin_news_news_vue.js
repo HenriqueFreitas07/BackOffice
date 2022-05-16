@@ -50,12 +50,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3889,78 +3883,66 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-12" },
-        [
-          _c("b-table", {
-            attrs: { hover: "", bordered: true, items: _vm.news },
-            scopedSlots: _vm._u([
-              {
-                key: "cell(editar)",
-                fn: function(data) {
-                  return [
-                    _c(
-                      "router-link",
-                      { attrs: { to: "/admin/news/" + data.item.editar } },
-                      [
-                        _c(
-                          "button",
-                          { staticClass: " btn btn-primary text-white" },
-                          [_c("i", { staticClass: "fa fa-eye" })]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      { attrs: { to: "/admin/news/edit/" + data.item.editar } },
-                      [
-                        _c(
-                          "button",
-                          { staticClass: " btn btn-success text-white" },
-                          [_c("i", { staticClass: "fa fa-pen" })]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
+  return _c(
+    "div",
+    [
+      _c("h2", [_vm._v("News")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("b-table", {
+        attrs: { hover: "", bordered: true, items: _vm.news },
+        scopedSlots: _vm._u([
+          {
+            key: "cell(editar)",
+            fn: function(data) {
+              return [
+                _c(
+                  "router-link",
+                  { attrs: { to: "/admin/news/" + data.item.editar } },
+                  [
                     _c(
                       "button",
-                      {
-                        staticClass: "btn btn-danger text-white",
-                        on: {
-                          click: function($event) {
-                            return _vm.Delete(data.item.editar)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-trash" })]
+                      { staticClass: " btn btn-primary text-white" },
+                      [_c("i", { staticClass: "fa fa-eye" })]
                     )
                   ]
-                }
-              }
-            ])
-          })
-        ],
-        1
-      )
-    ])
-  ])
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  { attrs: { to: "/admin/news/edit/" + data.item.editar } },
+                  [
+                    _c(
+                      "button",
+                      { staticClass: " btn btn-success text-white" },
+                      [_c("i", { staticClass: "fa fa-pen" })]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger text-white",
+                    on: {
+                      click: function($event) {
+                        return _vm.Delete(data.item.editar)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-trash" })]
+                )
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [_c("h2", [_vm._v("News")])])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

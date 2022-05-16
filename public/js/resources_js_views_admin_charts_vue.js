@@ -275,8 +275,35 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-function chartBarDemo() {
-  // Set new default font family and font color to mimic Bootstrap's default styling
+function chartBarDemo(data, type) {
+  var dataconfig;
+  var lb;
+
+  if (data == null) {
+    dataconfig = [{
+      label: "Doado",
+      backgroundColor: "gray",
+      hoverBackgroundColor: "",
+      borderColor: "#4e73df",
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    }];
+  } else if (data != null) {
+    dataconfig = [{
+      label: "Doado",
+      backgroundColor: "#4e73df",
+      hoverBackgroundColor: "#3d62ce",
+      borderColor: "#28a745",
+      data: data
+    }];
+  }
+
+  if (type != null) {
+    lb = type;
+  } else {
+    lb = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  } // Set new default font family and font color to mimic Bootstrap's default styling
+
+
   Chart.defaults.global.defaultFontFamily = "Nunito", '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
   Chart.defaults.global.defaultFontColor = "#858796"; // Bar Chart Example
 
@@ -284,14 +311,8 @@ function chartBarDemo() {
   var myBarChart = new Chart(ctx, {
     type: "bar",
     data: {
-      labels: ["January", "February", "March", "April", "May", "June"],
-      datasets: [{
-        label: "Revenue",
-        backgroundColor: "#4e73df",
-        hoverBackgroundColor: "#2e59d9",
-        borderColor: "#4e73df",
-        data: [4215, 5312, 6251, 7841, 9821, 14984]
-      }]
+      labels: lb,
+      datasets: dataconfig
     },
     options: {
       maintainAspectRatio: false,
@@ -303,6 +324,7 @@ function chartBarDemo() {
           bottom: 0
         }
       },
+      borderRadius: 5,
       scales: {
         xAxes: [{
           time: {
@@ -313,19 +335,19 @@ function chartBarDemo() {
             drawBorder: false
           },
           ticks: {
-            maxTicksLimit: 6
+            maxTicksLimit: 12
           },
           maxBarThickness: 25
         }],
         yAxes: [{
           ticks: {
             min: 0,
-            max: 15000,
+            max: 1000,
             maxTicksLimit: 5,
             padding: 10,
             // Include a dollar sign in the ticks
             callback: function callback(value, index, values) {
-              return "$" + number_format(value);
+              return "€" + number_format(value);
             }
           },
           gridLines: {
@@ -343,19 +365,19 @@ function chartBarDemo() {
       tooltips: {
         titleMarginBottom: 10,
         titleFontColor: "#6e707e",
-        titleFontSize: 14,
+        titleFontSize: 16,
         backgroundColor: "rgb(255,255,255)",
         bodyFontColor: "#858796",
         borderColor: "#dddfeb",
-        borderWidth: 1,
+        borderWidth: 2,
         xPadding: 15,
         yPadding: 15,
-        displayColors: false,
+        displayColors: true,
         caretPadding: 10,
         callbacks: {
           label: function label(tooltipItem, chart) {
             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || "";
-            return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
+            return datasetLabel + ": €" + number_format(tooltipItem.yLabel);
           }
         }
       }
