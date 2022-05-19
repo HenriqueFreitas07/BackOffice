@@ -20,7 +20,7 @@ class DonationsController extends Controller
             }
             else
             {
-                $data=Donations::all();
+                $data=Donations::whereYear("date",$ano)->orderBy("date","asc")->get();
                 return $data;
             }
         }

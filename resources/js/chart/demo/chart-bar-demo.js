@@ -23,7 +23,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
-export default function chartBarDemo(data,type) {
+export default function chartBarDemo(data,type,range) {
     let dataconfig
     let lb
     if(data==null) 
@@ -89,8 +89,8 @@ export default function chartBarDemo(data,type) {
                             unit: "month"
                         },
                         gridLines: {
-                            display: true,
-                            drawBorder: false
+                            display: false,
+                            drawBorder: true
                         },
                         ticks: {
                             maxTicksLimit: 24
@@ -102,7 +102,7 @@ export default function chartBarDemo(data,type) {
                     {
                         ticks: {
                             min: 0,
-                            max: 1000,
+                            max: range,
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
@@ -115,7 +115,7 @@ export default function chartBarDemo(data,type) {
                             zeroLineColor: "rgb(234, 236, 244)",
                             drawBorder: false,
                             borderDash: [2],
-                            zeroLineBorderDash: [2]
+                            zeroLineBorderDash: [3]
                         }
                     }
                 ]
@@ -133,7 +133,7 @@ export default function chartBarDemo(data,type) {
                 borderWidth: 2,
                 xPadding: 15,
                 yPadding: 15,
-                displayColors: true,
+                displayColors: false,
                 caretPadding: 10,
                 callbacks: {
                     label: function(tooltipItem, chart) {

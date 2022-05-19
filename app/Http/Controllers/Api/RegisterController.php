@@ -15,16 +15,16 @@ class RegisterController extends Controller
     {
         try {
             $user = User::create([
-                'first_name' => $request->input('first_name'),
-                'last_name' => $request->input('last_name'),
-                'email' => $request->input('email'),
-                'admin' => '1',
-                'password' => Hash::make($request->input('password')),
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'admin' => '0',
+                'password' => Hash::make($request->password),
             ]);
-
+/* 
             if (config('auth.must_verify_email')) {
                 event(new Registered($user));
-            }
+            } */
 
             return response()->json($user);
         } catch (\Exception $e) {

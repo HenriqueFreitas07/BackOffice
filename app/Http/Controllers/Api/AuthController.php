@@ -20,18 +20,9 @@ class AuthController extends Controller
     {
         try {
             if (Auth::attempt($request->only('email', 'password'))) {
-                Log::info("Entrou");
                 /** @var User $user */
                 $user = Auth::user();
                 $token = $user->createToken('API Token')->accessToken;
-                
-           /*      if (config('auth.must_verify_email') && !$user->hasVerifiedEmail()) {
-                    Log::info("Entrou");
-                    return response([
-                        'message' => 'Email must be verified.'
-                    ], 401);
-                } */
-
                 return response([
                     'message' => 'Login bem sucedido!',
                     'token' => $token,
@@ -58,8 +49,8 @@ class AuthController extends Controller
     {
         if(Auth::guard('api')->check())
         {
-            return response(["msg"=>"Valid token"],200);
+            return response(["msg"=>true],200);
         }
-            return response(["msg"=>"Invalid token"],404);
+            return response(["msg"=>false],201);
     }
 }

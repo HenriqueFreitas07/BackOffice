@@ -7,6 +7,7 @@ Vue.use(Vuex);
 const state = {
     user: null,
     donations:[],
+    year:false
 };
 
 const store = new Vuex.Store({
@@ -14,6 +15,9 @@ const store = new Vuex.Store({
     getters: {
         user: (state) => {
             return state.user;
+        },
+        year: (state) => {
+            return state.year;
         }
     },
     actions: {

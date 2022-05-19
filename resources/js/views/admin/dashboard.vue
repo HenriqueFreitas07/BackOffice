@@ -5,35 +5,44 @@
             <h1 class="h3 mb-0 text-gray-800">BigHand</h1>
         </div>
         <div class="row">
-            <!-- Area Chart -->
-            <div class=" col-lg-9">
-              <v-progress-linear
-        color="lime"
-        indeterminate
-        reverse
-      ></v-progress-linear>
-                <h3 class="ml-4 font-weight-bold text-primary">
-                    Total-{{ selectedYear }}
-                </h3>
-                <div class="chart-area" id="chart-area">
-                    <canvas id="myBarChart"></canvas>
-                </div>
-            </div>
-            <v-divider vertical> </v-divider>
-            <div class=" col-lg-3">
-                <h5 class="pl-2">Mês</h5>
+            <div class="col-md-6 d-flex">
+                <h5 class="my-auto mx-2">Mês</h5>
                 <b-form-select
                     @change="ChangeMonthDonations"
                     v-model="selectedMonth"
                     :options="selectMonths"
                 ></b-form-select>
-                <h5 class="pl-2">Ano</h5>
+            </div>
+            <div class="col-md-6 d-flex">
+                <h5 class="my-auto mx-2">Ano</h5>
                 <b-form-select
                     @change="ChangeYearDonations()"
                     v-model="selectedYear"
                     :options="Year"
                 ></b-form-select>
             </div>
+        </div>
+        <div class="row">
+            <!-- Area Chart -->
+            <div class=" col-lg-8">
+                <b-progress
+                    id="progress_bar"
+                    height="3px"
+                    :value="pr"
+                    class="mb-3"
+                ></b-progress>
+                <div class="chart-area" id="chart-area">
+                    <canvas id="myBarChart"></canvas>
+                </div>
+            </div>
+            <v-divider vertical></v-divider>
+            <div class="col-md-4">
+                <div class="chart-area" id="chart-area">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+            </div>
+          </div>
+                
 
             <!-- Pie Chart -->
             <!--  <div class="col-xl-4 col-lg-5">
@@ -108,6 +117,17 @@ import axios from "axios";
 export default {
     name: "Dashboard",
     data() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: toast => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+            }
+        });
         return {
             months: 1,
             dataSetChart: [],
@@ -131,12 +151,18 @@ export default {
                 { length: 10 },
                 (_, index) => new Date().getFullYear() - 10 + index + 1
             ),
-            selectedYear: 2022
+            selectedYear: this.$store.getters.year
+                ? this.$store.getters.year
+                : 2022,
+            Toast,
+            pr: 0,
+            progressEl: null,
+            projectsData:[]
         };
     },
     mounted() {
         //chartAreaDemo();
-        //chartPieDemo();
+        chartPieDemo();
         chartBarDemo();
         this.mediaMonths();
     },
@@ -147,11 +173,39 @@ export default {
                 let data = response.data;
                 let values = [];
                 data.forEach(el => {
+                    //console.log(el)
+                    
+                      if(this.projectsData.length == 0) {
+                        this.projectsData.push([el.project_id, el.amount]);
+                      }
+                      else
+                      { 
+                        this.projectsData.forEach((el1,index)=>{
+                          console.log(el1,index,el.project_id)
+                            if( el1[0]!=el.project_id)
+                            {
+                              this.projectsData.push([el.project_id, el.amount])
+                              console.log(this.projectsData)
+                            }
+                            else
+                            { 
+                              el1[1]+=el.amount
+                            }
+                        })
+                      }
+                      console.log(this.projectsData)
+                    
                     values.push(el.amount);
                 });
                 let a = values.reduce((a, b) => a + b, 0);
                 this.dataSetChart.push(a.toFixed(2));
                 setTimeout(() => {
+                    this.pr = this.pr + (1 / 12) * 100;
+                   // console.log(this.pr);
+                    if (this.pr.toFixed(0) == 100) {
+                        this.pr = 0;
+                        //document.getElementById("progress_bar").style.display="none"
+                    }
                     this.months++;
                     this.mediaMonths();
                 }, 25);
@@ -159,24 +213,24 @@ export default {
                 if (this.dataSetChart.length != 0 && this.months == 13) {
                     this.$store.commit("donations", this.dataSetChart);
                 }
-                console.log(this.$store.state.donations);
+
                 this.SwitchCanvas();
                 chartBarDemo(this.$store.state.donations);
                 this.months = 14;
-                console.log(this.dataSetChart);
-                if (this.dataSetChart.length == 0) {
+                /*  if (this.dataSetChart.length == 0) {
                     Swal.fire(
                         "Aviso",
                         "Não existe nenhuma, registo dos dados selecionados!",
                         "info"
                     );
-                }
+                } */
             }
         },
         async requestMonthDonations(month) {
             const r = await axios.get(
                 "donations/" + month + "/" + this.selectedYear
             );
+            console.log(r);
             return r;
         },
         async ChangeMonthDonations(month) {
@@ -190,14 +244,29 @@ export default {
                     this.dataSetChart.push(JSON.stringify(el.amount));
                     days.push(day.getMonth() + 1 + "/" + day.getDate());
                 });
-                this.SwitchCanvas();
-                chartBarDemo(this.dataSetChart, days);
+                const newArr = (
+                    (this.dataSetChart.reduce((a, b) => {
+                        return parseInt(a) + parseInt(b);
+                    }, 0) /
+                        this.dataSetChart.length) *
+                    1.68
+                ).toFixed(0);
+                if (this.dataSetChart.length == 0) {
+                    this.Toast.fire({
+                        icon: "info",
+                        title: "O mês selecionado não contêm nenhuma doação!"
+                    });
+                } else {
+                    this.SwitchCanvas();
+                    chartBarDemo(this.dataSetChart, days, newArr);
+                }
             } else {
                 this.mediaMonths();
             }
         },
         ChangeYearDonations() {
-            this.selectedMonth=13
+            this.pr = 0;
+            this.selectedMonth = 13;
             this.$store.commit("donations", []);
             this.months = 1;
             this.mediaMonths();
