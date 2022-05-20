@@ -13,7 +13,7 @@
                   <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                 </div>
                 <form class="user" @submit.prevent="register">
-                  <div class="form-group row">
+                  <div class="form-group row mb-2">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                       <input
                         type="text"
@@ -42,8 +42,8 @@
                       v-model="email"
                     />
                   </div>
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="form-group row mb-2">
+                    <div class="col-sm-6  mb-sm-0">
                       <input
                         type="password"
                         class="form-control form-control-user"

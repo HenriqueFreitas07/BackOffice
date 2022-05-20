@@ -137,7 +137,12 @@ export default {
           email: this.email,
           password: this.password,
         });
-
+        console.log(response);
+        let toast = Vue.toasted.show(response.data.message, {
+            theme: "toasted-primary",
+            position: "top-right",
+            duration: 3000,
+          });
         localStorage.setItem("token", response.data.token);
         this.$store.dispatch("user", response.data.user);
         this.$router.push("/admin");

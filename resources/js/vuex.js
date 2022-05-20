@@ -32,6 +32,9 @@ const store = new Vuex.Store({
         donations: (state, donation) => {
             state.donations = donation;
         },
+        year: (state, year) => {
+            state.year= year;
+        }
         
     },
     plugins: [createPersistedState()]

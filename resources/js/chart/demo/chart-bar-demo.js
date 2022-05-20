@@ -131,6 +131,7 @@ export default function chartBarDemo(data,type,range) {
                 bodyFontColor: "#858796",
                 borderColor: "#dddfeb",
                 borderWidth: 2,
+                borderRadius: 5,
                 xPadding: 15,
                 yPadding: 15,
                 displayColors: false,
@@ -142,8 +143,8 @@ export default function chartBarDemo(data,type,range) {
                             "";
                         return (
                             datasetLabel +
-                            ": €" +
-                            number_format(tooltipItem.yLabel)
+                            ":" +
+                            number_format(tooltipItem.yLabel)+" €"
                         );
                     }
                 }
