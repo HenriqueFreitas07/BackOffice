@@ -21,11 +21,11 @@ h2,h3,h4,h5,h6,h1 {
 
 
 .banner {
-  background-image: url("https://www.thebighand.org/wp-content/uploads/2019/03/thebighand_o_que_fazemos_banner-1920x500.jpg");
+  background-image: url("https://www.thebighand.org/wp-content/uploads/2019/02/banner_about_us_the_big_hand-1920x500.jpg");
   width: 100%;
-  min-height: 300px;
+  min-height: 400px;
   position: relative;
-  box-shadow: 0 0 12px 0rem rgba(0,0,0,0.3) inset;
+  box-shadow: 0 0 12px 0rem rgba(0,0,0,0.4) inset;
 }
 .banner div {
   position: absolute;
@@ -57,3 +57,9 @@ h2,h3,h4,h5,h6,h1 {
   color:#f8c811;
 }
 
+.imgMocambique
+{
+  position:absolute;
+  right:0px;
+  z-index:-1;
+}
