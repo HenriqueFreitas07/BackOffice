@@ -8,18 +8,16 @@
             <div class="card-body p-0">
               <!-- Nested Row within Card Body -->
               <div class="row">
-                <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                <div class="col-lg-6">
+                <div class="col-lg-4 d-none d-lg-block bg-password-image"></div>
+                <div class="col-lg-8">
                   <div class="p-5">
                     <div v-if="!emailSent">
                       <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-2">
-                          Forgot Your Password?
+                          Esqueceste-te da palavra-passe?
                         </h1>
                         <p class="mb-4">
-                          We get it, stuff happens. Just enter your email
-                          address below and we'll send you a link to reset your
-                          password!
+                          Percebe-se á coisas que acontecem... Mas nós arranjamos maneira de não teres desculpa para ajudar. Recompõe aqui a tua palavra-passe basta inserires o teu e-mail.
                         </p>
                       </div>
                       <form class="user" @submit.prevent="forgot">
@@ -29,12 +27,12 @@
                             class="form-control form-control-user"
                             id="exampleInputEmail"
                             aria-describedby="emailHelp"
-                            placeholder="Enter Email Address..."
+                            placeholder="Email Address..."
                             v-model="email"
                           />
                         </div>
                         <LoadingButton
-                          text="Reset password"
+                          text="Repor password"
                           v-bind:isLoading="isLoading"
                         />
                       </form>
@@ -48,12 +46,12 @@
                     <hr />
                     <div class="text-center">
                       <router-link class="small" to="/register"
-                        >Create an Account!</router-link
+                        >Criar Conta!</router-link
                       >
                     </div>
                     <div class="text-center">
                       <router-link class="small" to="/login"
-                        >Already have an account? Login!</router-link
+                        >Já têm uma conta? Entre !</router-link
                       >
                     </div>
                   </div>
@@ -102,3 +100,10 @@ export default {
   },
 };
 </script>
+<style>
+.bg-password-image {
+  background: url("https://www.thebighand.org/wp-content/uploads/2019/02/gallery_4_the_big_hand-360x360.jpg");
+  background-position: center;
+  background-size: contain;
+}
+</style>

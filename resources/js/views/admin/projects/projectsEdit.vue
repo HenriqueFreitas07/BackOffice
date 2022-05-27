@@ -5,8 +5,8 @@
                 <h2>{{ title }}</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
+        <b-row>
+            <b-col cols="6">
                 <div class="image_template rounded d-block">
                     <img
                         :src="
@@ -18,8 +18,8 @@
                 </div>
                 <br />
                 <!-- <b-form-file v-model="image" ref="image" class="mb-2"></b-form-file> -->
-            </div>
-            <div class="col-md-6">
+            </b-col>
+            <b-col cols="6">
                 <b-form-group
                     v-for="input in inputs"
                     :key="input.id"
@@ -67,8 +67,8 @@
                         Publicar
                     </b-form-checkbox>
                 </b-form-group>
-            </div>
-        </div>
+            </b-col>
+        </b-row>
         <div class="row mt-3">
             <div class="col-md-12">
                 <b-button @click="$router.push('/admin/projects')" variant="outline-primary">
@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import axios from "axios";
 export default {
     data() {
@@ -158,28 +159,40 @@ export default {
     /* Na escola da Aldeia de Montechimoio as crianças estudam com condiçoes precárias. É urgente ajudar! Construir uma sala de aulda para o pré-escolar é fundamental para que a Equipa Big Hand possa atuar na proteção das crianças em risco. */
     methods: {
         async Save() {
-            const r = await axios.post(
-                "/projects/update/" + this.$route.params.project_id,
-                {
-                    title: this.title,
-                    goal: this.goal,
-                    location: this.location,
-                    raised: this.raised,
-                    feature_image:this.image,
-                    story: this.story,
-                    is_publish: this.is_publish,
-                    date: this.date,
-                    project_id: this.$route.params.project_id
+            Swal.fire({
+                title: "Guardar alterações?",
+                text: "Pretende subescrever os dados anteriores!",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: " Sim!"
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    const r = await axios.post(
+                        "/projects/update/" + this.$route.params.project_id,
+                        {
+                            title: this.title,
+                            goal: this.goal,
+                            location: this.location,
+                            raised: this.raised,
+                            feature_image:this.image,
+                            story: this.story,
+                            is_publish: this.is_publish,
+                            date: this.date,
+                            project_id: this.$route.params.project_id
+                        }
+                    );
+                    if(r.status == 200){
+                      
+                      let toast = this.$toasted.show(r.data.message, {
+                        theme: "outline",
+                        position: "top-center",
+                        duration: 1000,
+                      });
+                    }
                 }
-            );
-            if(r.status == 200){
-              
-              let toast = this.$toasted.show(r.data.message, {
-                theme: "outline",
-                position: "top-center",
-                duration: 1000,
-              });
-            }
+            });
         }
     },
     async mounted() {

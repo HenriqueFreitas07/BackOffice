@@ -20,11 +20,6 @@ class RegisterController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-/* 
-            if (config('auth.must_verify_email')) {
-                event(new Registered($user));
-            } */
-
             return response()->json($user);
         } catch (\Exception $e) {
 

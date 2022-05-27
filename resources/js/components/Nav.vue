@@ -23,11 +23,11 @@
           <ul class="navbar-nav mt-2 mt-lg-0 ml-auto" v-if="!user">
             <li class="nav-item active">
               <router-link class="nav-link" to="/login"
-                >Login <span class="sr-only">(current)</span></router-link
+                >Entrar <span class="sr-only">(current)</span></router-link
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/register">Sign Up</router-link>
+              <router-link class="nav-link" to="/register">Criar Conta</router-link>
             </li>
           </ul>
           <ul class="navbar-nav mt-2 mt-lg-0 ml-auto" v-if="user">
@@ -41,7 +41,7 @@
             <li class="nav-item active">
               <router-link class="nav-link d-flex" to="/admin" >
                 <div class="m-3">
-                  Dashboard Admin
+                  Painel Admin
                 </div>
                 <i class="my-auto fa fa-screwdriver fa-lg"></i>
               </router-link>

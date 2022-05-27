@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import axios from "axios";
 export default {
     data() {
@@ -130,26 +131,38 @@ export default {
     },
     methods: {
         async Save() {
-            const f = {
-                title: this.title,
-                feature_image: this.image,
-                description: this.description,
-                is_publish: this.is_publish,
-                date: this.date,
-                project_id: this.$route.params.timeline_id
-            };
-            
-            const r = await axios.post(
-                "/timeline/update/" + this.$route.params.timeline_id,f
-            );
-            if (r.status == 200) {
-                let toast = this.$toasted.show(r.data.message, {
-                    theme: "outline",
-                    position: "top-center",
-                    duration: 1000
-                });
-                
-            }
+                        Swal.fire({
+                title: "Guardar alterações?",
+                text: "Pretende subescrever os dados anteriores!",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim!"
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    const f = {
+                        title: this.title,
+                        feature_image: this.image,
+                        description: this.description,
+                        is_publish: this.is_publish,
+                        date: this.date,
+                        project_id: this.$route.params.timeline_id
+                    };
+                    
+                    const r = await axios.post(
+                        "/timeline/update/" + this.$route.params.timeline_id,f
+                    );
+                    if (r.status == 200) {
+                        let toast = this.$toasted.show(r.data.message, {
+                            theme: "outline",
+                            position: "top-center",
+                            duration: 1000
+                        });
+                        
+                    }
+                }
+            });
         }
     },
     async mounted() {
@@ -160,6 +173,10 @@ export default {
         this.description = data.description;
         this.is_publish = data.is_publish;
         this.date = data.date;
+        if(data.feature_image==null)
+        { 
+          feature_image ="https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg"
+        }
     }
 };
 </script>

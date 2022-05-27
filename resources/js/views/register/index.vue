@@ -123,12 +123,7 @@ export default {
           password: this.password,
           password_confirm: this.password_confirm,
         });
-
         this.isLoading = false;
-
-        if (response.data.must_verify_email) {
-          this.$router.push(`/verify/user/${response.data.id}`);
-        } else {
           let message =
             "Conta criada com sucesso.";
           let toast = Vue.toasted.show(message, {
@@ -137,13 +132,12 @@ export default {
             duration: 3000,
           });
           this.$router.push("/login");
-        }
       } catch (error) {
         notify.authError(error);
         this.isLoading = false;
       }
     },
-  },
+  },  
 };
 </script>
 <style>

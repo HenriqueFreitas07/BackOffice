@@ -5,8 +5,10 @@ h2,h3,h4,h5,h6,h1 {
 }
 .image_template
 {
-  width: 100%;
-  max-height: 400px;
+  width: 90%;
+  margin: auto;
+  vertical-align:middle;
+  max-width: 400px;
   overflow: hidden;
   object-fit: scale-down;
 }
@@ -23,7 +25,7 @@ h2,h3,h4,h5,h6,h1 {
 .banner {
   background-image: url("https://www.thebighand.org/wp-content/uploads/2019/02/banner_about_us_the_big_hand-1920x500.jpg");
   width: 100%;
-  min-height: 400px;
+  min-height: 300px;
   position: relative;
   box-shadow: 0 0 12px 0rem rgba(0,0,0,0.4) inset;
 }
@@ -63,3 +65,39 @@ h2,h3,h4,h5,h6,h1 {
   right:0px;
   z-index:-1;
 }
+
+.btn-footer
+{
+  padding:5px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin:5px;
+  width: 80%;
+  transition: all 0.15s ease;
+  text-decoration: none!important;
+}
+.btn-footer:hover
+{
+  background-color: #f8c811;
+  color:white;
+}
+.link-footer
+{
+  color: #fff;
+  margin:2px;
+  width: 80%;
+  font-size:16px;
+  text-align:left;
+  transition: all 0.15s ease;
+  text-decoration: none!important;
+}
+.link-footer:hover
+{
+  color: #f8c811;
+}
+
+
+
+
+
+

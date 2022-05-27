@@ -8,11 +8,11 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-              <div class="col-lg-6">
+              <div class="col-lg-4 d-none d-lg-block bg-password-image"></div>
+              <div class="col-lg-8">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-2">Reset your password</h1>
+                    <h1 class="h4 text-gray-900 mb-2">Repor Palavra-passe</h1>
                   </div>
                   <form class="user" @submit.prevent="reset">
                     <div class="form-group">
@@ -75,8 +75,7 @@ export default {
           password_confirm: this.password_confirm,
           token: this.$route.params.token,
         });
-
-        let toast = this.$toasted.show("Password updated successfully", {
+        let toast = this.$toasted.show("Palavra-passe atualizada com sucesso", {
           theme: "toasted-primary",
           position: "top-right",
           duration: 5000,
@@ -90,3 +89,10 @@ export default {
   },
 };
 </script>
+<style>
+.bg-password-image {
+  background: url("https://www.thebighand.org/wp-content/uploads/2019/02/gallery_3_the_big_hand-360x360.jpg");
+  background-position: center;
+  background-size: cover;
+}
+</style>

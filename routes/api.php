@@ -19,7 +19,7 @@ Route::post('verifyToken', [Api\AuthController::class, 'verifyToken']);
 Route::post('login', [Api\AuthController::class, 'login']);
 Route::post('login/app', [Api\UserController::class, 'login']);
 
-Route::post('register', [Api\RegisterController::class, 'Aregister']);
+Route::post('register', [Api\RegisterController::class, 'register']);
 Route::post('register/app', [Api\UserController::class, 'register']);
 
 Route::post('forgot', [Api\ForgotController::class, 'forgot']);

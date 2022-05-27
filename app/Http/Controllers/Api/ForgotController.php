@@ -40,11 +40,11 @@ class ForgotController extends Controller
             });
 
             return response([
-                'message' => 'Check your email!'
+                'message' => 'Verifique o seu e-mail!'
             ]);
         } catch (\Exception $e) {
             return response([
-                'message' => 'Internal error, please try again later.' //$e->getMessage()
+                'message' => 'Internal error, please try again later.'//$e->getMessage()
             ], 400);
         }
     }

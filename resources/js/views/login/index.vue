@@ -8,23 +8,6 @@
         class="row justify-content-center"
         v-if="verificationStatus"
       >
-        <div class="col-xl-10 col-lg-12 col-md-9">
-          <div
-            class="alert alert-dismissible fade show mt-5"
-            v-bind:class="verificationAlertClasses"
-            role="alert"
-          >
-            <div>{{ verificationMessage }}</div>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
       </div>
       <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -32,11 +15,12 @@
             <div class="card-body p-0">
               <!-- Nested Row within Card Body -->
               <div class="row">
-                <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                <div class="col-lg-6">
+                <div class="col-lg-4 d-none d-lg-block bg-login-image"></div>
+                <div class="col-lg-8">
                   <div class="p-5">
+
                     <div class="text-center">
-                      <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                      <h1 class="h4 text-gray-900 mb-4">Bem vindo!</h1>
                     </div>
                     <form class="user" @submit.prevent="login">
                       <div class="form-group">
@@ -80,12 +64,12 @@
                     <hr />
                     <div class="text-center">
                       <router-link class="small" to="/forgot-password"
-                        >Forgot Password?</router-link
+                        >Esqueceu-se da palavra-passe?</router-link
                       >
                     </div>
                     <div class="text-center">
                       <router-link class="small" to="/register"
-                        >Create an Account!</router-link
+                        >Criar conta!</router-link
                       >
                     </div>
                   </div>
@@ -120,15 +104,6 @@ export default {
         'alert-danger': false
       }
     };
-  },
-  created: function () {
-    if (this.$route.query.verification_status === "success") {
-      this.verificationMessage = "Your account has been verified. Please log in.";
-      this.verificationAlertClasses['alert-success'] = true;
-    } else if (this.$route.query.verification_status === "error") {
-      this.verificationMessage = "Your account could not be verified.";
-      this.verificationAlertClasses['alert-danger'] = true;
-    }
   },
   methods: {
     async login() {
@@ -165,11 +140,4 @@ export default {
   background-size: cover;
 }
 
-
-
-.bg-password-image {
-  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
-  background-position: center;
-  background-size: cover;
-}
 </style>

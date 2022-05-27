@@ -15,7 +15,7 @@
         <div class="container">
             <b-row class="my-5">
                 <b-col cols="6">
-                    <h1>Quem Somos</h1>
+                    <h1  style="color:#1d76bb;">Quem Somos</h1>
                     The Big Hand é uma organização não-governamental para o
                     desenvolvimento que promove o bem-estar das crianças que
                     vivem em condições desfavoráveis, com especial atenção para

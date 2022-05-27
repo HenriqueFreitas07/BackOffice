@@ -14,8 +14,9 @@ let router = new Router({
             name: "home",
             component: () => import("./views/home/index.vue")
         },
+        
         {
-            path: "/login/:user_id?",
+            path: "/login",
             name: "login",
             component: () => import("./views/login/index.vue")
         },
